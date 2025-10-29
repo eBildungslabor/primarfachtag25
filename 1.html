@@ -5,66 +5,99 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/pico.min.css">
     <title>Primarfachtag 2025</title>
+    <style>
+        .timer-row {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .timer-row button {
+            margin: 0;
+            padding: 0.5rem 1rem;
+        }
+        #thema-anzeige {
+            font-size: 2em;
+            font-weight: bold;
+            margin: 2em 0;
+            min-height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
     <main class="container">
         <h1>Primarfachtag 2025</h1>
+        <progress value="10" max="100"></progress>
         <nav aria-label="breadcrumb">
             <ul>
                 <li><a href="index.html">Start</a></li>
-                <li>Schritt 1: Themenauswahl</li>
+                <li>Schritt 1 / 10</li>
             </ul>
         </nav>
-        <h2>Schritt 1: Themenauswahl</h2>
-        
-        <article>
-            <p>Maximale Zeit für diesen Schritt: <strong id="timer-display">10:00</strong> Minuten</p>
+        <h2>Aufgabe: Ihr wählt ein Thema!</h2>
+        <hr>        
+        <div class="timer-row">
+            <p>Timer: <strong id="timer-display">10:00</strong> Minuten</p>
             <button id="timer-button" onclick="toggleTimer()">Start</button>
-        </article>
-
-        <h3>Unsere Aufgabe</h3>
-        <p>Ihr entscheidet Euch für ein Thema, das ihr für fächerübergreifendes Lernen für geeignet haltet und zu dem ihr alle Freude habt, konkrete Ideen zu entwickeln.</p>
-        <p>Hier sind ein paar Inspirationen für Themen. Ebenso könnt ihr aber auch ein eigenes Thema wählen:</p>
-        
-        <article style="text-align: center;">
+        </div>
+        <hr>
+        <p>In diesem ersten Schritt entscheidet ihr Euch für ein Thema, das ihr für fächerübergreifendes Lernen für geeignet haltet und zu dem ihr alle Freude habt, konkrete Ideen zu entwickeln.</p>
+        <p>Hier sind ein paar Inspirationen für Themen:</p>
+        <article>
             <button onclick="neuesThema()">Thema anzeigen</button>
-            <div id="thema-anzeige" style="font-size: 2em; font-weight: bold; margin: 2em 0; min-height: 100px; display: flex; align-items: center; justify-content: center;"></div>
-        </article>
-
-        <p>Euer gewähltes Thema notiert ihr vor Euch auf dem Tisch als ersten, mittleren Eintrag einer im weiteren Verlauf entstehenden Mindmap.</p>
-        <p>Abschließend legt ihr nur noch fest, ob ihr Euer gewähltes Thema im folgenden für die Jahrgänge 1-3 oder 4-6 bearbeiten wollt.</p>
-        <p>Dann geht es weiter mit dem nächsten Schritt.</p>      
+            <div id="thema-anzeige"></div>
+        </article>     
+        <p>Ihr habt Euch gemeinsam für ein Thema entschieden? Dann geht es weiter zum nächsten Schritt!</p>
         <p><a href="challenges.html"><button>Nächster Schritt →</button></a></p>
     </main>
-
     <script>
         // Timer-Funktionalität
         let timerInterval = null;
         let remainingSeconds = 600; // 10 Minuten = 600 Sekunden
+        let isPaused = false;
 
         function toggleTimer() {
             const button = document.getElementById('timer-button');
             
-            if (timerInterval === null) {
+            if (timerInterval === null && !isPaused) {
                 // Timer starten
-                button.textContent = 'Stopp';
+                button.textContent = 'Pause';
                 timerInterval = setInterval(() => {
                     remainingSeconds--;
                     updateTimerDisplay();
                     
                     if (remainingSeconds <= 0) {
-                        stopTimer();
+                        resetTimer();
                     }
                 }, 1000);
-            } else {
-                // Timer stoppen und zurücksetzen
-                stopTimer();
+            } else if (timerInterval !== null) {
+                // Timer pausieren
+                clearInterval(timerInterval);
+                timerInterval = null;
+                isPaused = true;
+                button.textContent = 'Weiter';
+            } else if (isPaused) {
+                // Timer fortsetzen
+                button.textContent = 'Pause';
+                isPaused = false;
+                timerInterval = setInterval(() => {
+                    remainingSeconds--;
+                    updateTimerDisplay();
+                    
+                    if (remainingSeconds <= 0) {
+                        resetTimer();
+                    }
+                }, 1000);
             }
         }
 
-        function stopTimer() {
+        function resetTimer() {
             clearInterval(timerInterval);
             timerInterval = null;
+            isPaused = false;
             remainingSeconds = 600;
             updateTimerDisplay();
             document.getElementById('timer-button').textContent = 'Start';
@@ -73,7 +106,7 @@
         function updateTimerDisplay() {
             const minutes = Math.floor(remainingSeconds / 60);
             const seconds = remainingSeconds % 60;
-            document.getElementById('timer-display').textContent = 
+            document.getElementById('timer-display').textContent =
                 `${minutes}:${seconds.toString().padStart(2, '0')}`;
         }
 
@@ -129,15 +162,15 @@
             "Captain Future",
             "Asterix"
         ];
-        
+
         let letzterIndex = -1;
-        
+
         function neuesThema() {
             let neuerIndex;
             do {
                 neuerIndex = Math.floor(Math.random() * themen.length);
             } while (neuerIndex === letzterIndex && themen.length > 1);
-            
+
             letzterIndex = neuerIndex;
             document.getElementById('thema-anzeige').textContent = themen[neuerIndex];
         }
