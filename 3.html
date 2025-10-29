@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/pico.min.css">
+    <title>Primarfachtag 2025</title>
+</head>
+<body>
+    <main class="container">
+        <h1>Primarfachtag 2025</h1>
+        <nav aria-label="breadcrumb">
+            <ul>
+                <li><a href="index.html">Start</a></li>
+                <li>Schritt 3 | <strong id="timer-display">5:00</strong> <a href="#" id="timer-button" onclick="toggleTimer(); return false;">Start</a></li>
+            </ul>
+        </nav>
+        <h2>Schritt 3: Startet eine erste Blitzlichtrunde!</h2>
+      
+        <p>Jetzt beginnt ihr Euer Brainstorming. Begebt Euch dafür in eine kontinuierliche Blitzlichtrunde. Dabei beginnt die erste Person und nennt einen Begriff, der ihr zu dem Thema einfällt. Den Begriff notiert sie auch in der Mindmap. Dann ist die zweite Person an der Reihe. So geht es immer und möglichst schnell weiter, bis die Zeit abgelaufen ist. Ihr könnt dabei bei Euren Nennungen jeweils neue Äste an der Mindmap starten oder an bereits begonnenen Ästen weiter arbeiten.
+        <p>Am Ende solltet ihr einen möglichst umfassenden Blick auf mögliche Inhalte zu Eurem gewählten Thema unter Berücksichtigung der festgelegten Jahrgangsstufen habe.</p>
+        <p><a href="3.html"><button>Nächster Schritt →</button></a></p>
+<progress value="30" max="100"></progress>
+    </main>
+    <script>
+        // Timer-Funktionalität
+        let timerInterval = null;
+        let remainingSeconds = 300;
+        let isPaused = false;
+        
+        function toggleTimer() {
+            const button = document.getElementById('timer-button');
+            if (timerInterval === null && !isPaused) {
+                button.textContent = 'Pause';
+                timerInterval = setInterval(() => {
+                    remainingSeconds--;
+                    updateTimerDisplay();
+                    if (remainingSeconds <= 0) {
+                        resetTimer();
+                    }
+                }, 1000);
+            } else if (timerInterval !== null) {
+                clearInterval(timerInterval);
+                timerInterval = null;
+                isPaused = true;
+                button.textContent = 'Weiter';
+            } else if (isPaused) {
+                button.textContent = 'Pause';
+                isPaused = false;
+                timerInterval = setInterval(() => {
+                    remainingSeconds--;
+                    updateTimerDisplay();
+                    if (remainingSeconds <= 0) {
+                        resetTimer();
+                    }
+                }, 1000);
+            }
+        }
+        
+        function resetTimer() {
+            clearInterval(timerInterval);
+            timerInterval = null;
+            isPaused = false;
+            remainingSeconds = 600;
+            updateTimerDisplay();
+            document.getElementById('timer-button').textContent = 'Start';
+        }
+        
+        function updateTimerDisplay() {
+            const minutes = Math.floor(remainingSeconds / 60);
+            const seconds = remainingSeconds % 60;
+            document.getElementById('timer-display').textContent =
+                `${minutes}:${seconds.toString().padStart(2, '0')}`;
+        }
+        
+
+    </script>
+</body>
+</html>
+
