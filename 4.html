@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/pico.min.css">
+    <title>Primarfachtag 2025</title>
+</head>
+<body>
+    <main class="container">
+        <h1>Primarfachtag 2025</h1>
+        <nav aria-label="breadcrumb">
+            <ul>
+                <li><a href="index.html">Start</a></li>
+                <li>Schritt 4 | Timer: <strong id="timer-display">10:00</strong> <a href="#" id="timer-button" onclick="toggleTimer(); return false;">Start</a></li>
+            </ul>
+        </nav>
+        <h2>Schritt 4: Nach fachlichen Perspektiven clustern!</h2>
+        <p>Auf eurem Tisch findet ihr Karten mit den unterschiedlichen fachlichen Perspektiven: Deutsch, Mathe, Sport, Englisch, Kunst, Religion, Musik, Gewi/Nawi/Sachunterricht. Sortiert eure gesammelten inhaltlichen Aspekte nach den einzelnen fachlichen Perspektiven. Anschließend könnt ihr mithilfe von KI-Unterstützung mögliche Lücken füllen. Dazu könnt ihr den folgenden Prompt ausfüllen und in ein Sprachmodell eurer Wahl kopieren. Wir empfehlen euch die Nutzung der <a href="https://tools.fobizz.com/chat" target="_blank">fobizz-Tools</a>.</p>
+        
+        <blockquote>
+            <form id="prompt-form">
+                <label for="thema">Euer Thema:</label>
+                <input type="text" id="thema" name="thema" placeholder="z.B. Nachhaltigkeit" required>
+                
+                <label for="klassenstufe">Klassenstufen:</label>
+                <select id="klassenstufe" name="klassenstufe" required>
+                    <option value="">Bitte wählen</option>
+                    <option value="1-3">1-3</option>
+                    <option value="4-6">4-6</option>
+                </select>
+                
+                <p><strong>Euer fertiger Prompt:</strong></p>
+                <textarea id="prompt-output" readonly rows="8"></textarea>
+                
+                <button type="button" onclick="copyPrompt()">Prompt kopieren</button>
+            </form>
+        </blockquote>
+        
+        <p><a href="5.html"><button>Nächster Schritt →</button></a></p>
+        <progress value="60" max="100"></progress>
+    </main>
+    
+    <script>
+        // Timer-Funktionalität
+        let timerInterval = null;
+        let remainingSeconds = 600;
+        let isPaused = false;
+        
+        function toggleTimer() {
+            const button = document.getElementById('timer-button');
+            if (timerInterval === null && !isPaused) {
+                button.textContent = 'Pause';
+                timerInterval = setInterval(() => {
+                    remainingSeconds--;
+                    updateTimerDisplay();
+                    if (remainingSeconds <= 0) {
+                        resetTimer();
+                    }
+                }, 1000);
+            } else if (timerInterval !== null) {
+                clearInterval(timerInterval);
+                timerInterval = null;
+                isPaused = true;
+                button.textContent = 'Weiter';
+            } else if (isPaused) {
+                button.textContent = 'Pause';
+                isPaused = false;
+                timerInterval = setInterval(() => {
+                    remainingSeconds--;
+                    updateTimerDisplay();
+                    if (remainingSeconds <= 0) {
+                        resetTimer();
+                    }
+                }, 1000);
+            }
+        }
+        
+        function resetTimer() {
+            clearInterval(timerInterval);
+            timerInterval = null;
+            isPaused = false;
+            remainingSeconds = 600;
+            updateTimerDisplay();
+            document.getElementById('timer-button').textContent = 'Start';
+        }
+        
+        function updateTimerDisplay() {
+            const minutes = Math.floor(remainingSeconds / 60);
+            const seconds = remainingSeconds % 60;
+            document.getElementById('timer-display').textContent =
+                `${minutes}:${seconds.toString().padStart(2, '0')}`;
+        }
+        
+        // Prompt-Generator
+        const hiddenContext = `Schreibe prägnant und übersichtlich. Halte dich an dieses Vorgehen. Beachte bei deinen Vorschlägen unsere pädagogischen Grundlagen: Pädagogik ist die positive Begleitung von Menschen mit all ihren Gaben und Ideen auf ihren individuellen Lernwegen. Dafür bringen wir als Pädagog*innen unterschiedliche Professionen ein. Wir sind uns der intrinsischen Lernmotivation bewusst. Sie hat in der praktischen Ausgestaltung Priorität. Deshalb gestalten wir unseren Lernalltag themenorientiert, jahrgangsgemischt und fächerübergreifend. Wir fördern divergierendes Denken, gemeinsame Verantwortung und die Entfaltung der Potentiale. Unsere Schüler*innen sind an allen, sie betreffenden Entscheidungen alters- und entwicklungsangemessen beteiligt. Wir begleiten die Entwicklung der Basiskompetenzen aktiv. Dafür nutzen wir u.a. den Wechsel zwischen individuellen und gemeinsamen Lernzeiten. So bereiten wir den Boden für eigenaktive Lernprozesse in Gemeinschaft. Dazu gehört aktive Beziehungsarbeit im sozialen Raum. Wir machen Motivation sowie Lernmomente erlebbar und Lernerfolge sichtbar. Für die konkrete Entscheidung des „Wie" in der täglichen Praxis nutzen wir wissenschaftliche Erkenntnisse der pädagogischen Forschung. Jede Schule strebt auf der Grundlage dieses Gesetzes ihr eigenes Profil an. Dabei folgt sie der Handwerksordnung. Auf dieser Grundlage streben wir eine inklusive Schule als Ort der Begegnung und Vielfalt an. Das evangelische Profil ist in der gesamten Leichtigkeit unseres Schulalltags erlebbar. Starte jetzt mit der Frage nach unserer ersten fachlichen Perspektive.`;
+        
+        document.getElementById('thema').addEventListener('input', updatePrompt);
+        document.getElementById('klassenstufe').addEventListener('change', updatePrompt);
+        
+        function updatePrompt() {
+            const thema = document.getElementById('thema').value;
+            const klassenstufe = document.getElementById('klassenstufe').value;
+            const output = document.getElementById('prompt-output');
+            
+            if (thema && klassenstufe) {
+                output.value = `Wir sind Lehrkräfte, die für evangelische Schulen Ideen für fächerübergreifende Projekte zum Thema "${thema}" für die Klassenstufen ${klassenstufe} entwickeln wollen. Du fragst uns immer nach einer möglichen fachlichen Perspektive. Wir nennen dir diese. Dann schlägst du uns eine Liste mit 10 möglichen inhaltlichen Bereichen für unser Thema und die genannte fachliche Perspektive vor und fragst uns, ob wir noch weitere Themen brauchen. Ansonsten sollen wir dir die nächste fachliche Perspektive nennen.\n\n${hiddenContext}`;
+            } else {
+                output.value = 'Bitte fülle zuerst alle Felder aus.';
+            }
+        }
+        
+        function copyPrompt() {
+            const output = document.getElementById('prompt-output');
+            if (output.value && output.value !== 'Bitte fülle zuerst alle Felder aus.') {
+                output.select();
+                document.execCommand('copy');
+                alert('Prompt wurde kopiert!');
+            } else {
+                alert('Bitte fülle zuerst alle Felder aus.');
+            }
+        }
+    </script>
+</body>
+</html>
