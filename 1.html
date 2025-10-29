@@ -16,35 +16,34 @@
                 <li>Schritt 1</li>
             </ul>
         </nav>
-        <small>Timer: <strong id="timer-display">10:00</strong> <button id="timer-button" class="outline secondary" onclick="toggleTimer()" role="button">Start</button></small>
- 
         <h2>Schritt 1: Ihr wählt ein Thema!</h2>
         <hr>
+               <p>Timer: <strong id="timer-display">10:00</strong> <a href="#" id="timer-button" onclick="toggleTimer(); return false;">Start</a></p>
+
+    </hr>
         <p>In diesem ersten Schritt entscheidet ihr Euch für ein Thema, das ihr für fächerübergreifendes Lernen für geeignet haltet und zu dem ihr alle Freude habt, konkrete Ideen zu entwickeln.</p>
         <p>Hier sind ein paar Inspirationen für Themen:</p>
         <article>
             <p id="thema-anzeige" role="status"></p>
             <button onclick="neuesThema()">Neues Thema</button>
-        
         </article>     
         <p>Ihr habt Euch gemeinsam für ein Thema entschieden? Dann geht es weiter zum nächsten Schritt!</p>
         <p><a href="challenges.html"><button>Nächster Schritt →</button></a></p>
+<progress value="10" max="100"></progress>
     </main>
     <script>
         // Timer-Funktionalität
         let timerInterval = null;
         let remainingSeconds = 600;
         let isPaused = false;
-
+        
         function toggleTimer() {
             const button = document.getElementById('timer-button');
-            
             if (timerInterval === null && !isPaused) {
                 button.textContent = 'Pause';
                 timerInterval = setInterval(() => {
                     remainingSeconds--;
                     updateTimerDisplay();
-                    
                     if (remainingSeconds <= 0) {
                         resetTimer();
                     }
@@ -60,14 +59,13 @@
                 timerInterval = setInterval(() => {
                     remainingSeconds--;
                     updateTimerDisplay();
-                    
                     if (remainingSeconds <= 0) {
                         resetTimer();
                     }
                 }, 1000);
             }
         }
-
+        
         function resetTimer() {
             clearInterval(timerInterval);
             timerInterval = null;
@@ -76,14 +74,14 @@
             updateTimerDisplay();
             document.getElementById('timer-button').textContent = 'Start';
         }
-
+        
         function updateTimerDisplay() {
             const minutes = Math.floor(remainingSeconds / 60);
             const seconds = remainingSeconds % 60;
             document.getElementById('timer-display').textContent =
                 `${minutes}:${seconds.toString().padStart(2, '0')}`;
         }
-
+        
         // Themen-Funktionalität
         const themen = [
             "So leben Menschen",
@@ -136,18 +134,22 @@
             "Captain Future",
             "Asterix"
         ];
-
+        
         let letzterIndex = -1;
-
+        
         function neuesThema() {
             let neuerIndex;
             do {
                 neuerIndex = Math.floor(Math.random() * themen.length);
             } while (neuerIndex === letzterIndex && themen.length > 1);
-
             letzterIndex = neuerIndex;
             document.getElementById('thema-anzeige').innerHTML = `<strong>${themen[neuerIndex]}</strong>`;
         }
+        
+        // Beim Laden ein erstes Thema anzeigen
+        window.addEventListener('DOMContentLoaded', () => {
+            neuesThema();
+        });
     </script>
 </body>
 </html>
