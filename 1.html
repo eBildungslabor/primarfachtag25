@@ -5,42 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/pico.min.css">
     <title>Primarfachtag 2025</title>
-    <style>
-        .timer-row {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-        .timer-row button {
-            margin: 0;
-            padding: 0.5rem 1rem;
-        }
-       
-    </style>
 </head>
 <body>
     <main class="container">
         <h1>Primarfachtag 2025</h1>
         <progress value="10" max="100"></progress>
+        <small>Timer: <strong id="timer-display">10:00</strong> <button id="timer-button" onclick="toggleTimer()" role="button">Start</button></small>
         <nav aria-label="breadcrumb">
             <ul>
                 <li><a href="index.html">Start</a></li>
-                <li>Schritt 1</li>
+                <li>Schritt 1 / 10</li>
             </ul>
         </nav>
-        <hr>        
-        <div class="timer-row">
-            <p>Timer: <strong id="timer-display">10:00</strong> Minuten</p>
-            <button id="timer-button" onclick="toggleTimer()">Start</button>
-        </div>
+        <h2>Aufgabe: Ihr wählt ein Thema!</h2>
         <hr>
-        <h2>Eure Aufgabe: Ihr wählt ein Thema!</h2>
-
         <p>In diesem ersten Schritt entscheidet ihr Euch für ein Thema, das ihr für fächerübergreifendes Lernen für geeignet haltet und zu dem ihr alle Freude habt, konkrete Ideen zu entwickeln.</p>
         <p>Hier sind ein paar Inspirationen für Themen:</p>
         <article>
             <button onclick="neuesThema()">Thema anzeigen</button>
-            <div id="thema-anzeige"></div>
+            <p id="thema-anzeige" role="status"></p>
         </article>     
         <p>Ihr habt Euch gemeinsam für ein Thema entschieden? Dann geht es weiter zum nächsten Schritt!</p>
         <p><a href="challenges.html"><button>Nächster Schritt →</button></a></p>
@@ -48,14 +31,13 @@
     <script>
         // Timer-Funktionalität
         let timerInterval = null;
-        let remainingSeconds = 600; // 10 Minuten = 600 Sekunden
+        let remainingSeconds = 600;
         let isPaused = false;
 
         function toggleTimer() {
             const button = document.getElementById('timer-button');
             
             if (timerInterval === null && !isPaused) {
-                // Timer starten
                 button.textContent = 'Pause';
                 timerInterval = setInterval(() => {
                     remainingSeconds--;
@@ -66,13 +48,11 @@
                     }
                 }, 1000);
             } else if (timerInterval !== null) {
-                // Timer pausieren
                 clearInterval(timerInterval);
                 timerInterval = null;
                 isPaused = true;
                 button.textContent = 'Weiter';
             } else if (isPaused) {
-                // Timer fortsetzen
                 button.textContent = 'Pause';
                 isPaused = false;
                 timerInterval = setInterval(() => {
@@ -164,7 +144,7 @@
             } while (neuerIndex === letzterIndex && themen.length > 1);
 
             letzterIndex = neuerIndex;
-            document.getElementById('thema-anzeige').textContent = themen[neuerIndex];
+            document.getElementById('thema-anzeige').innerHTML = `<strong>${themen[neuerIndex]}</strong>`;
         }
     </script>
 </body>
