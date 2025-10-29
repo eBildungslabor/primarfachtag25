@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/pico.min.css">
+    <title>Primarfachtag 2025</title>
+</head>
+<body>
+    <main class="container">
+        <h1>Primarfachtag 2025</h1>
+        <nav aria-label="breadcrumb">
+            <ul>
+                <li><a href="index.html">Start</a></li>
+                <li>Schritt 1: Themenauswahl</li>
+            </ul>
+        </nav>
+        <h2>Schritt 1: Themenauswahl</h2>
+        
+        <article>
+            <p>Maximale Zeit für diesen Schritt: <strong id="timer-display">10:00</strong> Minuten</p>
+            <button id="timer-button" onclick="toggleTimer()">Start</button>
+        </article>
+
+        <h3>Unsere Aufgabe</h3>
+        <p>Ihr entscheidet Euch für ein Thema, das ihr für fächerübergreifendes Lernen für geeignet haltet und zu dem ihr alle Freude habt, konkrete Ideen zu entwickeln.</p>
+        <p>Hier sind ein paar Inspirationen für Themen. Ebenso könnt ihr aber auch ein eigenes Thema wählen:</p>
+        
+        <article style="text-align: center;">
+            <button onclick="neuesThema()">Thema anzeigen</button>
+            <div id="thema-anzeige" style="font-size: 2em; font-weight: bold; margin: 2em 0; min-height: 100px; display: flex; align-items: center; justify-content: center;"></div>
+        </article>
+
+        <p>Euer gewähltes Thema notiert ihr vor Euch auf dem Tisch als ersten, mittleren Eintrag einer im weiteren Verlauf entstehenden Mindmap.</p>
+        <p>Abschließend legt ihr nur noch fest, ob ihr Euer gewähltes Thema im folgenden für die Jahrgänge 1-3 oder 4-6 bearbeiten wollt.</p>
+        <p>Dann geht es weiter mit dem nächsten Schritt.</p>      
+        <p><a href="challenges.html"><button>Nächster Schritt →</button></a></p>
+    </main>
+
+    <script>
+        // Timer-Funktionalität
+        let timerInterval = null;
+        let remainingSeconds = 600; // 10 Minuten = 600 Sekunden
+
+        function toggleTimer() {
+            const button = document.getElementById('timer-button');
+            
+            if (timerInterval === null) {
+                // Timer starten
+                button.textContent = 'Stopp';
+                timerInterval = setInterval(() => {
+                    remainingSeconds--;
+                    updateTimerDisplay();
+                    
+                    if (remainingSeconds <= 0) {
+                        stopTimer();
+                    }
+                }, 1000);
+            } else {
+                // Timer stoppen und zurücksetzen
+                stopTimer();
+            }
+        }
+
+        function stopTimer() {
+            clearInterval(timerInterval);
+            timerInterval = null;
+            remainingSeconds = 600;
+            updateTimerDisplay();
+            document.getElementById('timer-button').textContent = 'Start';
+        }
+
+        function updateTimerDisplay() {
+            const minutes = Math.floor(remainingSeconds / 60);
+            const seconds = remainingSeconds % 60;
+            document.getElementById('timer-display').textContent = 
+                `${minutes}:${seconds.toString().padStart(2, '0')}`;
+        }
+
+        // Themen-Funktionalität
+        const themen = [
+            "So leben Menschen",
+            "Tiere",
+            "Gerechtigkeit",
+            "Eigene Themen (jedes Kind oder kleine Gruppe ein eigenes Thema)",
+            "Alles Familie oder was?",
+            "Was wir feiern",
+            "Schimpfwörter",
+            "Wasser",
+            "Gummi",
+            "Ganz groß und ganz klein",
+            "Zeit",
+            "Minecraft (Stories)",
+            "Altes Testament (Noahs Arche, David vs. Goliath, Joseph und seine Brüder, ...)",
+            "Streetart",
+            "Geometrie im Leben",
+            "Kubismus",
+            "Spiele",
+            "Erde",
+            "Humor",
+            "Das Weltall",
+            "Oliven",
+            "Pflanzen",
+            "Straßen(verkehr)",
+            "Bewegung",
+            "Geschwindigkeit",
+            "Schönheit / Asymmetrie",
+            "Gegensätze",
+            "Holz",
+            "Volkslieder",
+            "Zauberflöte",
+            "Impressionismus",
+            "Licht",
+            "Luft",
+            "Ziegelsteine",
+            "Feuer",
+            "Pangäa",
+            "Parcour (Assassins Creed / Mirrors Edge)",
+            "Ringen",
+            "Tanzen",
+            "Zirkus",
+            "20.000 Meilen unter dem Meer",
+            "Bibi & Tina",
+            "Alice im Wunderland",
+            "Homers Reisen",
+            "Tim & Struppi",
+            "Jim Knopf",
+            "Birne im Weltall",
+            "Captain Future",
+            "Asterix"
+        ];
+        
+        let letzterIndex = -1;
+        
+        function neuesThema() {
+            let neuerIndex;
+            do {
+                neuerIndex = Math.floor(Math.random() * themen.length);
+            } while (neuerIndex === letzterIndex && themen.length > 1);
+            
+            letzterIndex = neuerIndex;
+            document.getElementById('thema-anzeige').textContent = themen[neuerIndex];
+        }
+    </script>
+</body>
+</html>
