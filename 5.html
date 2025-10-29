@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/pico.min.css">
+    <title>Primarfachtag 2025</title>
+</head>
+<body>
+    <main class="container">
+        <h1>Primarfachtag 2025</h1>
+        <nav aria-label="breadcrumb">
+            <ul>
+                <li><a href="index.html">Start</a></li>
+                <li>Schritt 5 | Timer: <strong id="timer-display">5:00</strong> <a href="#" id="timer-button" onclick="toggleTimer(); return false;">Start</a></li>
+            </ul>
+        </nav>
+        <h2>Schritt 5: Begebt euch in einen Kopfstand (= entwickelt dümmstmögliche Ideen)!</h2>
+        <p>Neben den fachlichen Perspektiven geht es bei guter Kompetenzentwicklung vor allem auch darum, überfachliche Kompetenzen durch themenbasiertes Lernen zu entwickeln. Bereits heute Vormittag habt ihr diese überfachlichen Kompetenzen kennengelernt:</p>
+        
+        <ul>
+            <li><strong>Kritisches Denken:</strong> Anwenden der wissenschaftlichen Methode in thematischen Kontexten. Dabei spielen u.a. Reflexionsfähigkeit, Differenzierung und Haltung eine Rolle.</li>
+            <li><strong>Kommunikation:</strong> Die Fähigkeit, eigenes Denken auf unterschiedlichen Wegen und in unterschiedlichen Ausdrucksformen mitteilen zu können. Dazu gehört auch die Anwendung der Basiskompetenzen Lesen, Schreiben, Zuhören, mathematische Zugänge zum Weltverständnis und ein praktisches Verständnis von Wissenstransfer.</li>
+            <li><strong>Zusammenarbeit:</strong> Kompetenz in verschiedenen Formen kollaborativen Lernens und Arbeitens für ein gemeinsames Ergebnis.</li>
+            <li><strong>Herzensklugheit:</strong> Ausprägung von emotionalen Kompetenzen.</li>
+            <li><strong>Kreativität:</strong> Anwenden unterschiedlicher Lösungswege, Problemlösungsfähigkeit und offener, eigener Zugänge zu Herausforderungen.</li>
+        </ul>
+        
+        <p>Diese Kompetenzen findet ihr auch als Karten auf eurem Tisch.</p>
+        
+        <p>Eure Aufgabe ist es nun, euch in einen Kopfstand zu begeben. Das bedeutet: Ihr überlegt euch in diesem Schritt zunächst dümmstmögliche Ideen, wie ihr Lernen gestalten müsstet, damit diese überfachlichen Kompetenzen garantiert nicht entwickelt werden.</p>
+        
+        <p>Betrachtet dabei unterschiedliche überfachliche Kompetenzen und versucht euch gegenseitig immer weiter zu übertrumpfen, also eine noch dümmere Möglichkeit zu finden, als die vor euch redende Person.</p>
+        
+        <p>Diese Kopfstand-Übung hat das Ziel, das Denken zu öffnen. Im nächsten Schritt begeben wir uns dann aus dem Kopfstand zurück.</p>
+        
+        <p><a href="6.html"><button>Nächster Schritt →</button></a></p>
+        <progress value="50" max="100"></progress>
+    </main>
+    <script>
+        // Timer-Funktionalität
+        let timerInterval = null;
+        let remainingSeconds = 300;
+        let isPaused = false;
+        
+        function toggleTimer() {
+            const button = document.getElementById('timer-button');
+            if (timerInterval === null && !isPaused) {
+                button.textContent = 'Pause';
+                timerInterval = setInterval(() => {
+                    remainingSeconds--;
+                    updateTimerDisplay();
+                    if (remainingSeconds <= 0) {
+                        resetTimer();
+                    }
+                }, 1000);
+            } else if (timerInterval !== null) {
+                clearInterval(timerInterval);
+                timerInterval = null;
+                isPaused = true;
+                button.textContent = 'Weiter';
+            } else if (isPaused) {
+                button.textContent = 'Pause';
+                isPaused = false;
+                timerInterval = setInterval(() => {
+                    remainingSeconds--;
+                    updateTimerDisplay();
+                    if (remainingSeconds <= 0) {
+                        resetTimer();
+                    }
+                }, 1000);
+            }
+        }
+        
+        function resetTimer() {
+            clearInterval(timerInterval);
+            timerInterval = null;
+            isPaused = false;
+            remainingSeconds = 300;
+            updateTimerDisplay();
+            document.getElementById('timer-button').textContent = 'Start';
+        }
+        
+        function updateTimerDisplay() {
+            const minutes = Math.floor(remainingSeconds / 60);
+            const seconds = remainingSeconds % 60;
+            document.getElementById('timer-display').textContent =
+                `${minutes}:${seconds.toString().padStart(2, '0')}`;
+        }
+    </script>
+</body>
+</html>
+</html>
