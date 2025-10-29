@@ -15,8 +15,8 @@
                 <li>Schritt 4 | Timer: <strong id="timer-display">10:00</strong> <a href="#" id="timer-button" onclick="toggleTimer(); return false;">Start</a></li>
             </ul>
         </nav>
-        <h2>Schritt 4: Nach fachlichen Perspektiven clustern!</h2>
-        <p>Auf eurem Tisch findet ihr Karten mit den unterschiedlichen fachlichen Perspektiven: Deutsch, Mathe, Sport, Englisch, Kunst, Religion, Musik, Gewi/Nawi/Sachunterricht. Sortiert eure gesammelten inhaltlichen Aspekte nach den einzelnen fachlichen Perspektiven. Anschließend könnt ihr mithilfe von KI-Unterstützung mögliche Lücken füllen. Dazu könnt ihr den folgenden Prompt ausfüllen und in ein Sprachmodell eurer Wahl kopieren. Wir empfehlen euch die Nutzung der <a href="https://tools.fobizz.com/chat" target="_blank">fobizz-Tools</a>.</p>
+        <h2>Schritt 4: Um fachliche Perspektiven ergänzen!</h2>
+        <p>Wahrscheinlich habt ihr bei Eurem Brainstorming schon intuitiv unterschiedliche, fachliche Perspektiven berücksichtigt: Deutsch, Mathe, Sport, Englisch, Kunst, Religion, Musik, Gewi/Nawi/Sachunterricht. Mithilfe von KI-Unterstützung könnt ihr nun noch mögliche Lücken füllen. Dazu könnt ihr den folgenden Prompt nacheinander mit der fachlichen Perspektive ausfüllen, zu der Euch Eure Mindmap noch zu wenig umfangreich erscheint und in ein Sprachmodell eurer Wahl kopieren. Wir empfehlen euch die Nutzung dieses <a href="https://tools.fobizz.com/chat" target="_blank">Chatraums bei den fobizz-Tools</a>.</p>
         
         <blockquote>
             <form id="prompt-form">
@@ -30,15 +30,29 @@
                     <option value="4-6">4-6</option>
                 </select>
                 
+                <label for="fach">Fachliche Perspektive:</label>
+                <select id="fach" name="fach" required>
+                    <option value="">Bitte wählen</option>
+                    <option value="Deutsch">Deutsch</option>
+                    <option value="Mathematik">Mathematik</option>
+                    <option value="Sport">Sport</option>
+                    <option value="Englisch">Englisch</option>
+                    <option value="Kunst">Kunst</option>
+                    <option value="Religion">Religion</option>
+                    <option value="Musik">Musik</option>
+                    <option value="Gewi/Nawi/Sachunterricht">Gewi/Nawi/Sachunterricht</option>
+                </select>
+                
                 <p><strong>Euer fertiger Prompt:</strong></p>
                 <textarea id="prompt-output" readonly rows="8"></textarea>
                 
                 <button type="button" onclick="copyPrompt()">Prompt kopieren</button>
             </form>
         </blockquote>
-        
+
+        <p>Nutzt den Chat mit dem KI-Sprachmodell um Eure Mindmap weiter zu estalten. Am Ende sollten alle fachlichen Perspektiven darin berücksichtigt sein.</p>
         <p><a href="5.html"><button>Nächster Schritt →</button></a></p>
-        <progress value="60" max="100"></progress>
+        <progress value="40" max="100"></progress>
     </main>
     
     <script>
@@ -93,18 +107,20 @@
         }
         
         // Prompt-Generator
-        const hiddenContext = `Schreibe prägnant und übersichtlich. Halte dich an dieses Vorgehen. Beachte bei deinen Vorschlägen unsere pädagogischen Grundlagen: Pädagogik ist die positive Begleitung von Menschen mit all ihren Gaben und Ideen auf ihren individuellen Lernwegen. Dafür bringen wir als Pädagog*innen unterschiedliche Professionen ein. Wir sind uns der intrinsischen Lernmotivation bewusst. Sie hat in der praktischen Ausgestaltung Priorität. Deshalb gestalten wir unseren Lernalltag themenorientiert, jahrgangsgemischt und fächerübergreifend. Wir fördern divergierendes Denken, gemeinsame Verantwortung und die Entfaltung der Potentiale. Unsere Schüler*innen sind an allen, sie betreffenden Entscheidungen alters- und entwicklungsangemessen beteiligt. Wir begleiten die Entwicklung der Basiskompetenzen aktiv. Dafür nutzen wir u.a. den Wechsel zwischen individuellen und gemeinsamen Lernzeiten. So bereiten wir den Boden für eigenaktive Lernprozesse in Gemeinschaft. Dazu gehört aktive Beziehungsarbeit im sozialen Raum. Wir machen Motivation sowie Lernmomente erlebbar und Lernerfolge sichtbar. Für die konkrete Entscheidung des „Wie" in der täglichen Praxis nutzen wir wissenschaftliche Erkenntnisse der pädagogischen Forschung. Jede Schule strebt auf der Grundlage dieses Gesetzes ihr eigenes Profil an. Dabei folgt sie der Handwerksordnung. Auf dieser Grundlage streben wir eine inklusive Schule als Ort der Begegnung und Vielfalt an. Das evangelische Profil ist in der gesamten Leichtigkeit unseres Schulalltags erlebbar. Starte jetzt mit der Frage nach unserer ersten fachlichen Perspektive.`;
+        const hiddenContext = `Schreibe prägnant und übersichtlich. Beachte bei deinen Vorschlägen unsere pädagogischen Grundlagen: Pädagogik ist die positive Begleitung von Menschen mit all ihren Gaben und Ideen auf ihren individuellen Lernwegen. Dafür bringen wir als Pädagog*innen unterschiedliche Professionen ein. Wir sind uns der intrinsischen Lernmotivation bewusst. Sie hat in der praktischen Ausgestaltung Priorität. Deshalb gestalten wir unseren Lernalltag themenorientiert, jahrgangsgemischt und fächerübergreifend. Wir fördern divergierendes Denken, gemeinsame Verantwortung und die Entfaltung der Potentiale. Unsere Schüler*innen sind an allen, sie betreffenden Entscheidungen alters- und entwicklungsangemessen beteiligt. Wir begleiten die Entwicklung der Basiskompetenzen aktiv. Dafür nutzen wir u.a. den Wechsel zwischen individuellen und gemeinsamen Lernzeiten. So bereiten wir den Boden für eigenaktive Lernprozesse in Gemeinschaft. Dazu gehört aktive Beziehungsarbeit im sozialen Raum. Wir machen Motivation sowie Lernmomente erlebbar und Lernerfolge sichtbar. Für die konkrete Entscheidung des „Wie" in der täglichen Praxis nutzen wir wissenschaftliche Erkenntnisse der pädagogischen Forschung. Jede Schule strebt auf der Grundlage dieses Gesetzes ihr eigenes Profil an. Dabei folgt sie der Handwerksordnung. Auf dieser Grundlage streben wir eine inklusive Schule als Ort der Begegnung und Vielfalt an. Das evangelische Profil ist in der gesamten Leichtigkeit unseres Schulalltags erlebbar.`;
         
         document.getElementById('thema').addEventListener('input', updatePrompt);
         document.getElementById('klassenstufe').addEventListener('change', updatePrompt);
+        document.getElementById('fach').addEventListener('change', updatePrompt);
         
         function updatePrompt() {
             const thema = document.getElementById('thema').value;
             const klassenstufe = document.getElementById('klassenstufe').value;
+            const fach = document.getElementById('fach').value;
             const output = document.getElementById('prompt-output');
             
-            if (thema && klassenstufe) {
-                output.value = `Wir sind Lehrkräfte, die für evangelische Schulen Ideen für fächerübergreifende Projekte zum Thema "${thema}" für die Klassenstufen ${klassenstufe} entwickeln wollen. Du fragst uns immer nach einer möglichen fachlichen Perspektive. Wir nennen dir diese. Dann schlägst du uns eine Liste mit 10 möglichen inhaltlichen Bereichen für unser Thema und die genannte fachliche Perspektive vor und fragst uns, ob wir noch weitere Themen brauchen. Ansonsten sollen wir dir die nächste fachliche Perspektive nennen.\n\n${hiddenContext}`;
+            if (thema && klassenstufe && fach) {
+                output.value = `Wir sind Lehrkräfte, die für evangelische Schulen Ideen für fächerübergreifende Projekte zum Thema "${thema}" für die Klassenstufen ${klassenstufe} entwickeln wollen. Schlage uns eine Liste mit 10 inhaltlichen Bereichen und fachlichen Kompetenzen vor, die aus der Perspektive "${fach}" bei diesem Thema bearbeitet werden könnten.\n\n${hiddenContext}`;
             } else {
                 output.value = 'Bitte fülle zuerst alle Felder aus.';
             }
