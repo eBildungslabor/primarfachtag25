@@ -10,20 +10,22 @@
     <main class="container">
         <h1>Primarfachtag 2025</h1>
         <progress value="10" max="100"></progress>
-        <small>Timer: <strong id="timer-display">10:00</strong> <button id="timer-button" onclick="toggleTimer()" role="button">Start</button></small>
         <nav aria-label="breadcrumb">
             <ul>
                 <li><a href="index.html">Start</a></li>
-                <li>Schritt 1 / 10</li>
+                <li>Schritt 1</li>
             </ul>
         </nav>
-        <h2>Aufgabe: Ihr wählt ein Thema!</h2>
+        <small>Timer: <strong id="timer-display">10:00</strong> <button id="timer-button" class="outline secondary" onclick="toggleTimer()" role="button">Start</button></small>
+ 
+        <h2>Schritt 1: Ihr wählt ein Thema!</h2>
         <hr>
         <p>In diesem ersten Schritt entscheidet ihr Euch für ein Thema, das ihr für fächerübergreifendes Lernen für geeignet haltet und zu dem ihr alle Freude habt, konkrete Ideen zu entwickeln.</p>
         <p>Hier sind ein paar Inspirationen für Themen:</p>
         <article>
-            <button onclick="neuesThema()">Thema anzeigen</button>
             <p id="thema-anzeige" role="status"></p>
+            <button onclick="neuesThema()">Neues Thema</button>
+        
         </article>     
         <p>Ihr habt Euch gemeinsam für ein Thema entschieden? Dann geht es weiter zum nächsten Schritt!</p>
         <p><a href="challenges.html"><button>Nächster Schritt →</button></a></p>
