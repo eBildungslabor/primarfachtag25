@@ -12,7 +12,7 @@
        
 
         <h2>Schritt 1: Ihr wählt ein Thema!</h2>
-          <p><strong>⏲️ Timer für diesen Schritt:</strong> <strong id="timer-display">10:00</strong> <a href="#" id="timer-button" onclick="toggleTimer(); return false;">Start</a></p>
+          <p><strong>⏲️ Timer für diesen Schritt:</strong> <strong id="timer-display">5:00</strong> <a href="#" id="timer-button" onclick="toggleTimer(); return false;">Start</a></p>
       
         <p>In diesem ersten Schritt entscheidet ihr Euch für ein Thema, das ihr für fächerübergreifendes Lernen für geeignet haltet und zu dem ihr alle Freude habt, konkrete Ideen zu entwickeln. Begebt Euch dazu in eine gemeinsame Diskussion.</p>
         
@@ -66,7 +66,7 @@
             clearInterval(timerInterval);
             timerInterval = null;
             isPaused = false;
-            remainingSeconds = 600;
+            remainingSeconds = 300;
             updateTimerDisplay();
             document.getElementById('timer-button').textContent = 'Start';
         }
