@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/pico.min.css">
+    <title>Primarfachtag 2025</title>
+</head>
+<body>
+    <main class="container">
+        <h1>Primarfachtag 2025</h1>
+          
+        <h2>Schritt 7: Unterrichtsideen clustern!</h2>
+                  <p><strong>⏲️ Timer für diesen Schritt:</strong> <strong id="timer-display">5:00</strong> <a href="#" id="timer-button" onclick="toggleTimer(); return false;">Start</a></p>
+
+      
+        <p>Jetzt seid ihr fast am Ende Eurer Ideenentwicklung angekommen. Vor Euch auf dem Tisch sollte sich eine Mindmap befinden, in der zu Eurem Thema und der gewählten Klassenstufe vielfältige Ideen notiert sind, die ihr inhaltlich und in Hinblick auf die fachliche und überfachliche Kompetenzentwicklung nutzen könnt. Im nächsten und letzten Schritt solltet ihr daraus mindestens eine bzw. gerne auch mehrere Unterrichtsideen extrahieren, die ihr mit Euren Kolleg*innen zur Weiternutzung teilen wollt. Betrachtet dazu die gesamte Mindmap und clustert oder sortiert sie bei Bedarf.  
+        <p>Danach geht es weiter zum letzten Schritt des Teilens!</p>
+        <p><a href="8.html"><button>Letzter Schritt →</button></a></p>
+<progress value="90" max="100"></progress>
+                        <p><a href="6.html"><button class="secondary outline"><- Zurück zum vorherigen Schritt</button></a></p>
+
+    </main>
+    <script>
+        // Timer-Funktionalität
+        let timerInterval = null;
+        let remainingSeconds = 300;
+        let isPaused = false;
+        
+        function toggleTimer() {
+            const button = document.getElementById('timer-button');
+            if (timerInterval === null && !isPaused) {
+                button.textContent = 'Pause';
+                timerInterval = setInterval(() => {
+                    remainingSeconds--;
+                    updateTimerDisplay();
+                    if (remainingSeconds <= 0) {
+                        resetTimer();
+                    }
+                }, 1000);
+            } else if (timerInterval !== null) {
+                clearInterval(timerInterval);
+                timerInterval = null;
+                isPaused = true;
+                button.textContent = 'Weiter';
+            } else if (isPaused) {
+                button.textContent = 'Pause';
+                isPaused = false;
+                timerInterval = setInterval(() => {
+                    remainingSeconds--;
+                    updateTimerDisplay();
+                    if (remainingSeconds <= 0) {
+                        resetTimer();
+                    }
+                }, 1000);
+            }
+        }
+        
+        function resetTimer() {
+            clearInterval(timerInterval);
+            timerInterval = null;
+            isPaused = false;
+            remainingSeconds = 600;
+            updateTimerDisplay();
+            document.getElementById('timer-button').textContent = 'Start';
+        }
+        
+        function updateTimerDisplay() {
+            const minutes = Math.floor(remainingSeconds / 60);
+            const seconds = remainingSeconds % 60;
+            document.getElementById('timer-display').textContent =
+                `${minutes}:${seconds.toString().padStart(2, '0')}`;
+        }
+        
+
+    </script>
+</body>
+</html>
