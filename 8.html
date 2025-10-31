@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/pico.min.css">
+    <title>Primarfachtag 2025</title>
+</head>
+<body>
+    <main class="container">
+        <h1>Primarfachtag 2025</h1>
+          
+        <h2>Schritt 8: Teilt Eure Ideen!</h2>
+                  <p><strong>⏲️ Timer für diesen Schritt:</strong> <strong id="timer-display">5:00</strong> <a href="#" id="timer-button" onclick="toggleTimer(); return false;">Start</a></p>
+
+      
+        <p>Zum Teilen Eurer entwickelten Ideen haben wir eine Taskcard eingerichtet. Es gibt dort zwei Spalten: Klassenstufe 1-3 und Klassenstufe 3-6. Legt eine neue Karte in der betreffenden Spalte an, gebt der ersten Eurer entwickelten Unterrichtsideen einen prägnanten Titel und beschreibt sie in wenigen Sätzen. Genau so verfahrt ihr auch mit möglicherweise weiteren Ideen.</p>
+      <p>In einer zusätzlichen Spalte ist Raum, um ein Foto von Eurer entwickelten Mindmap zu teilen, so dass sie Euch selbst und auch anderen zur späteren Inspiration zur Verfügung steht. Ebenso gibt es eine Spalte für Feedback zum Prozess, das ihr loswerden wollt.</p>
+      <p>Hier gelangt ihr <a href="https://hoffbauer.taskcards.app/#/board/a58599b2-be08-4a53-8c68-ded8b08d87cb?token=4d34a60a-a86f-4a99-9347-59b15d9ba5b1" target=blank">zur eingerichteten Taskcard</a></p>
+          <p>Falls ihr noch Zeit habt, könnt ihr zum Abschluss eine schnelle Blitzlichtrunde machen, was ihr jeweils für Euch individuell aus der Gruppenarbeit mitnehmt.
+        <p>Vielen Dank für Eure Beteiligung und Euer Teilen!</p>
+<progress value="100" max="100"></progress>
+                        <p><a href="7.html"><button class="secondary outline"><- Zurück zum vorherigen Schritt</button></a></p>
+
+    </main>
+    <script>
+        // Timer-Funktionalität
+        let timerInterval = null;
+        let remainingSeconds = 300;
+        let isPaused = false;
+        
+        function toggleTimer() {
+            const button = document.getElementById('timer-button');
+            if (timerInterval === null && !isPaused) {
+                button.textContent = 'Pause';
+                timerInterval = setInterval(() => {
+                    remainingSeconds--;
+                    updateTimerDisplay();
+                    if (remainingSeconds <= 0) {
+                        resetTimer();
+                    }
+                }, 1000);
+            } else if (timerInterval !== null) {
+                clearInterval(timerInterval);
+                timerInterval = null;
+                isPaused = true;
+                button.textContent = 'Weiter';
+            } else if (isPaused) {
+                button.textContent = 'Pause';
+                isPaused = false;
+                timerInterval = setInterval(() => {
+                    remainingSeconds--;
+                    updateTimerDisplay();
+                    if (remainingSeconds <= 0) {
+                        resetTimer();
+                    }
+                }, 1000);
+            }
+        }
+        
+        function resetTimer() {
+            clearInterval(timerInterval);
+            timerInterval = null;
+            isPaused = false;
+            remainingSeconds = 600;
+            updateTimerDisplay();
+            document.getElementById('timer-button').textContent = 'Start';
+        }
+        
+        function updateTimerDisplay() {
+            const minutes = Math.floor(remainingSeconds / 60);
+            const seconds = remainingSeconds % 60;
+            document.getElementById('timer-display').textContent =
+                `${minutes}:${seconds.toString().padStart(2, '0')}`;
+        }
+        
+
+    </script>
+</body>
+</html>
