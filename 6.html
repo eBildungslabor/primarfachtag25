@@ -23,7 +23,7 @@
         <blockquote>
             <form id="prompt-form">
                 <label for="thema">Euer Thema:</label>
-                <input type="text" id="thema" name="thema" placeholder="z.B. Nachhaltigkeit" required>
+                <input type="text" id="thema" name="thema" placeholder="z.B. Advent" required>
                 <label for="klassenstufe">Klassenstufen:</label>
                 <select id="klassenstufe" name="klassenstufe" required>
                     <option value="">Bitte wählen</option>
@@ -98,7 +98,7 @@
                 `${minutes}:${seconds.toString().padStart(2, '0')}`;
         }
         // Prompt-Generator
-        const hiddenContext = `Schreibe prägnant und übersichtlich. Formuliere gezielt zur benannten überfachlichen Kompetenz. Beachte bei deinen Vorschlägen unsere pädagogischen Grundlagen: Pädagogik ist die positive Begleitung von Menschen mit all ihren Gaben und Ideen auf ihren individuellen Lernwegen. Dafür bringen wir als Pädagog*innen unterschiedliche Professionen ein. Wir sind uns der intrinsischen Lernmotivation bewusst. Sie hat in der praktischen Ausgestaltung Priorität. Deshalb gestalten wir unseren Lernalltag themenorientiert, jahrgangsgemischt und fächerübergreifend. Wir fördern divergierendes Denken, gemeinsame Verantwortung und die Entfaltung der Potentiale. Unsere Schüler*innen sind an allen, sie betreffenden Entscheidungen alters- und entwicklungsangemessen beteiligt. Wir begleiten die Entwicklung der Basiskompetenzen aktiv. Dafür nutzen wir u.a. den Wechsel zwischen individuellen und gemeinsamen Lernzeiten. So bereiten wir den Boden für eigenaktive Lernprozesse in Gemeinschaft. Dazu gehört aktive Beziehungsarbeit im sozialen Raum. Wir machen Motivation sowie Lernmomente erlebbar und Lernerfolge sichtbar. Für die konkrete Entscheidung des „Wie" in der täglichen Praxis nutzen wir wissenschaftliche Erkenntnisse der pädagogischen Forschung. Jede Schule strebt auf der Grundlage dieses Gesetzes ihr eigenes Profil an. Dabei folgt sie der Handwerksordnung. Auf dieser Grundlage streben wir eine inklusive Schule als Ort der Begegnung und Vielfalt an. Das evangelische Profil ist in der gesamten Leichtigkeit unseres Schulalltags erlebbar.`;
+        const hiddenContext = `Schreibe prägnant und übersichtlich. Formuliere gezielt zur benannten überfachlichen Kompetenz. Beachte bei deinen Vorschlägen unsere pädagogischen Grundlagen: Pädagogik ist die positive Begleitung von Menschen mit all ihren Gaben und Ideen auf ihren individuellen Lernwegen. Dafür bringen wir als Pädagog*innen unterschiedliche Professionen ein. Wir sind uns der intrinsischen Lernmotivation bewusst. Sie hat in der praktischen Ausgestaltung Priorität. Deshalb gestalten wir unseren Lernalltag themenorientiert, jahrgangsgemischt und fächerübergreifend. Wir fördern divergierendes Denken, gemeinsame Verantwortung und die Entfaltung der Potentiale. Unsere Schüler*innen sind an allen, sie betreffenden Entscheidungen alters- und entwicklungsangemessen beteiligt. Wir begleiten die Entwicklung der Basiskompetenzen aktiv. Dafür nutzen wir u.a. den Wechsel zwischen individuellen und gemeinsamen Lernzeiten. So bereiten wir den Boden für eigenaktive Lernprozesse in Gemeinschaft. Dazu gehört aktive Beziehungsarbeit im sozialen Raum. Wir machen Motivation sowie Lernmomente erlebbar und Lernerfolge sichtbar..`;
         
         const kompetenzDefinitionen = {
             'Kritisches Denken': 'Fähigkeit, Informationen zu hinterfragen, Phänomene mehrperspektivisch zu analysieren und wissenschaftliche Denkweisen (Beobachtung, Hypothesenbildung, Überprüfung) anzuwenden. Dazu gehören Reflexionsfähigkeit, differenziertes Urteilen und das Entwickeln einer eigenen, begründeten Position.',
@@ -118,7 +118,7 @@
             const output = document.getElementById('prompt-output');
             if (thema && klassenstufe && kompetenz) {
                 const definition = kompetenzDefinitionen[kompetenz];
-                output.value = `Wir sind Lehrkräfte, die für evangelische Schulen konkrete Lernideen zum Thema "${thema}" für die Klassenstufen ${klassenstufe} entwickeln wollen. Dabei möchten wir besonders die überfachliche Kompetenz "${kompetenz}" fördern.\n\nWas verstehen wir darunter: ${definition}\n\nSchlage uns eine Liste mit 10 konkreten, umsetzbaren Lernaktivitäten und Aufgabenformaten vor, die diese Kompetenz im Kontext des Themas "${thema}" gezielt entwickeln.\n\n${hiddenContext}`;
+                output.value = `Wir sind Lehrkräfte, die für evangelische Schulen konkrete, fächerübergreifende Lernideen zum Thema "${thema}" für die Klassenstufen ${klassenstufe} entwickeln wollen. Dabei möchten wir besonders die überfachliche Kompetenz "${kompetenz}" fördern.\n\nWas verstehen wir darunter: ${definition}\n\nSchlage uns eine Liste mit 10 konkreten, umsetzbaren Ideen und Formaten vor, die diese übefachliche Kompetenz im Kontext des Themas "${thema}" für die genannte Klassenstufen gezielt entwickeln.\n\n${hiddenContext}`;
             } else {
                 output.value = 'Bitte fülle zuerst alle Felder aus.';
             }
