@@ -30,8 +30,8 @@
                 <label for="klassenstufe">Klassenstufen:</label>
                 <select id="klassenstufe" name="klassenstufe" required>
                     <option value="">Bitte wählen</option>
-                    <option value="1-3">1-3</option>
-                    <option value="4-6">4-6</option>
+                    <option value="1-3, Beginn der Schulzeit">1-3</option>
+                    <option value="4-6, Mitte und Ende der Primarschulzeit">4-6</option>
                 </select>
                 
                 <label for="fach">Fachliche Perspektive:</label>
@@ -44,7 +44,7 @@
                     <option value="Kunst">Kunst</option>
                     <option value="Religion">Religion</option>
                     <option value="Musik">Musik</option>
-                    <option value="Gewi/Nawi/Sachunterricht">Gewi/Nawi/Sachunterricht</option>
+                    <option value="Gesellschaftswissenschaft/Naturwissenschaft/Sachunterricht">Gewi/Nawi/Sachunterricht</option>
                 </select>
                 
                 <p><strong>Euer fertiger Prompt:</strong></p>
@@ -114,7 +114,7 @@
         }
         
         // Prompt-Generator
-        const hiddenContext = `Schreibe prägnant und übersichtlich. Formuliere gezielt zu der benannten fachlichen Perspektive. Beachte bei deinen Vorschlägen unsere pädagogischen Grundlagen: Pädagogik ist die positive Begleitung von Menschen mit all ihren Gaben und Ideen auf ihren individuellen Lernwegen. Dafür bringen wir als Pädagog*innen unterschiedliche Professionen ein. Wir sind uns der intrinsischen Lernmotivation bewusst. Sie hat in der praktischen Ausgestaltung Priorität. Deshalb gestalten wir unseren Lernalltag themenorientiert, jahrgangsgemischt und fächerübergreifend. Wir fördern divergierendes Denken, gemeinsame Verantwortung und die Entfaltung der Potentiale. Unsere Schüler*innen sind an allen, sie betreffenden Entscheidungen alters- und entwicklungsangemessen beteiligt. Wir begleiten die Entwicklung der Basiskompetenzen aktiv. Dafür nutzen wir u.a. den Wechsel zwischen individuellen und gemeinsamen Lernzeiten. So bereiten wir den Boden für eigenaktive Lernprozesse in Gemeinschaft. Dazu gehört aktive Beziehungsarbeit im sozialen Raum. Wir machen Motivation sowie Lernmomente erlebbar und Lernerfolge sichtbar. Für die konkrete Entscheidung des „Wie" in der täglichen Praxis nutzen wir wissenschaftliche Erkenntnisse der pädagogischen Forschung. Jede Schule strebt auf der Grundlage dieses Gesetzes ihr eigenes Profil an. Dabei folgt sie der Handwerksordnung. Auf dieser Grundlage streben wir eine inklusive Schule als Ort der Begegnung und Vielfalt an. Das evangelische Profil ist in der gesamten Leichtigkeit unseres Schulalltags erlebbar.`;
+        const hiddenContext = `Schreibe prägnant und übersichtlich. Formuliere gezielt zu der benannten fachlichen Perspektive und berücksichtige die Klassenstufe.`;
         
         document.getElementById('thema').addEventListener('input', updatePrompt);
         document.getElementById('klassenstufe').addEventListener('change', updatePrompt);
